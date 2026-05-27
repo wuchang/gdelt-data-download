@@ -1,0 +1,14 @@
+# Binary
+gdelt-data-download
+/gdelt-data-download
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Env
+.env
