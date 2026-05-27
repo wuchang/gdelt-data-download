@@ -1,21 +1,65 @@
 # gdelt-data-download
 
+[![Go Version](https://img.shields.io/badge/Go-1.26+-00ADD8?style=flat&logo=go)](https://go.dev/)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+
 从 [GDELT Project](https://www.gdeltproject.org/) 官方服务器下载 GDELT v2 数据文件的命令行工具。
 
 支持按日期范围、数据表类型批量下载，以及实时监测模式。输出可保存到本地目录或直接上传到 MinIO。
 
+## 特点
+
+- **自动优选最快 IP**：启动时对所有 GDELT 服务器 IP 并发 TCP 竞速，选择延迟最低的节点直连下载，速度优于默认 DNS 解析
+- **断点续传**：已下载的文件自动跳过，中断后重跑不浪费流量
+- **实时监测**：`--watch` 模式持续轮询，自动拉取最新数据
+- **多目标输出**：本地目录或 MinIO/S3 兼容存储
+- **零运行时依赖**：静态编译的单一二进制文件
+
+## 免责声明
+
+本工具仅供个人学习与研究使用，严禁用于任何非法用途。
+
+使用者应自行遵守 [GDELT Project](https://www.gdeltproject.org/) 的服务条款及数据使用政策。下载数据的使用、存储与分发须符合相关法律法规。因违规使用产生的任何法律责任由使用者自行承担，项目作者不对此负责。
+
+## 环境要求
+
+- [Go](https://go.dev/dl/) 1.26 或更高版本（从源码编译时需要）
+- 预编译二进制文件无需任何运行时依赖
+
 ## 安装
+
+### 预编译二进制
+
+从 [Releases](https://github.com/wuchang/gdelt-data-download/releases) 页面下载对应平台的二进制文件即可直接使用。
+
+### go install
 
 ```bash
 go install github.com/wuchang/gdelt-data-download@latest
 ```
 
-或手动编译：
+### 手动编译
 
 ```bash
-git clone <repo-url>
+git clone https://github.com/wuchang/gdelt-data-download.git
 cd gdelt-data-download
 go build -o gdelt-data-download .
+```
+
+#### 交叉编译
+
+```bash
+# Linux (amd64)
+GOOS=linux GOARCH=amd64 go build -o gdelt-data-download-linux-amd64 .
+
+# macOS (amd64)
+GOOS=darwin GOARCH=amd64 go build -o gdelt-data-download-darwin-amd64 .
+
+# macOS (arm64 / Apple Silicon)
+GOOS=darwin GOARCH=arm64 go build -o gdelt-data-download-darwin-arm64 .
+
+# Windows (amd64)
+GOOS=windows GOARCH=amd64 go build -o gdelt-data-download.exe .
 ```
 
 ## 使用
@@ -119,6 +163,20 @@ gdelt-data-download --start-date 20260501 --flat
 - 彩色日志输出
 - 零运行时依赖（静态编译）
 
+## 贡献
+
+欢迎提交 Issue 和 Pull Request。
+
+1. Fork 本仓库
+2. 创建特性分支 (`git checkout -b feature/xxx`)
+3. 提交变更 (`git commit -m 'Add xxx'`)
+4. 推送到分支 (`git push origin feature/xxx`)
+5. 创建 Pull Request
+
+## Changelog
+
+详见 [CHANGELOG.md](CHANGELOG.md)。
+
 ## License
 
-MIT
+[MIT](LICENSE)
