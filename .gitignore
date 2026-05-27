@@ -12,3 +12,5 @@ Thumbs.db
 
 # Env
 .env
+gdelt-download.exe
+.claude/settings.local.json
