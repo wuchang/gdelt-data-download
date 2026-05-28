@@ -91,14 +91,14 @@ gdelt-data-download --start-date 20260501 --flat
 | `--start-date` | 必填 | 起始日期 YYYYMMDD |
 | `--end-date` | 空 | 结束日期，不填则一直下载到最新 |
 | `--table` | `export,gkg,mentions` | 数据表，逗号分隔多个 |
-| `--output` | `local` | 输出目标：`local` 或 `minio` |
+| `--output` | `local` | 输出目标：`local` 或 `minio` ，使用 minio 须配置MINIO_ENDPOINT等环境变量|
+| `--dir` | `./data` | 本地数据目录 |
 | `--flat` | `false` | 扁平目录，不使用 `year=YYYY/month=MM/day=DD` 层级 |
 | `--translation` | `false` | 同时下载翻译版本 |
 | `--watch` | `false` | 下载完成后进入实时监测模式 |
-| `--dir` | `./data` | 本地数据目录 |
 | `--concurrency` | `5` | 下载并发数 |
-| `--bucket` | | MinIO bucket 名称 |
-| `--zip-prefix` | `gdelt-zip` | MinIO 对象前缀 |
+| `--bucket` | | MinIO bucket 名称, output=minio 时使用 |
+| `--zip-prefix` | `gdelt-zip` | MinIO 对象前缀 , output=minio 时使用|
 
 ### MinIO 配置
 
